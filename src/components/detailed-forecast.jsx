@@ -8,8 +8,10 @@ const DetailedForecast = props => {
 		<span className='minTemp'>{props.forecasts.temperature.min}</span>
 		<span className='windSpeed'>{props.forecasts.wind.speed}</span>
 		<span className='windDirection'>{props.forecasts.wind.direction}</span>
-		<span className='humidity'>{props.humidity}</span>
+		<span className='humidity'>{props.forecasts.humidity}</span>
 	</div>;
 };
+
+
 
 export default DetailedForecast
