@@ -4,6 +4,8 @@ import LocationDetails from './location-details';
 import ForecastSummaries from './forecast-summeries';
 import '../styles/app.scss';
 import DetailedForecast from './detailed-forecast';
+import Axios from 'axios';
+import { get } from 'http';
 
 class App extends React.Component {
 	constructor(props) {
@@ -11,7 +13,12 @@ class App extends React.Component {
 		console.log(props);
 
 		this.state = {
-			selectedDate: this.props.forecasts[0].date,
+			selectedDate: 0,
+			forecasts: [],
+			location: {
+				city: "",
+				country: "",
+			},
 		};
 
 		this.handleForecastSelector = this.handleForecastSelector.bind(this);
@@ -23,25 +30,37 @@ class App extends React.Component {
 		});
 	}
 
+	componentDidMount() {
+		Axios.get(`https://mcr-codes-weather.herokuapp.com/forecast`).then(response => {
+			this.setState({
+				forecasts: response.data.forecasts,
+				location: {
+					city: response.data.location.city,
+					country: response.data.location.country
+				}
+			})
+		})
+	}
+
 	render() {
-		const selectedForecast = this.props.forecasts.find(forecast => forecast.date === this.state.selectedDate);
+		const selectedForecast = this.state.forecasts.find(forecast => forecast.date === this.state.selectedDate);
 
 		return (
 			<div>
-				<LocationDetails city={this.props.location.city} country={this.props.location.country} />
-				<ForecastSummaries forecasts={this.props.forecasts} onForecastSelect={this.handleForecastSelector} />
-				<DetailedForecast forecasts={selectedForecast} />
+				<LocationDetails city={this.state.location.city} country={this.state.location.country} />
+				<ForecastSummaries forecasts={this.state.forecasts} onForecastSelect={this.handleForecastSelector} />
+				{selectedForecast && <DetailedForecast forecast={selectedForecast} />}
 			</div>
 		);
 	}
 }
 
-App.propTypes = {
+/* App.propTypes = {
 	location: PropTypes.shape({
 		city: PropTypes.string,
 		country: PropTypes.string,
 	}).isRequired,
 	forecasts: PropTypes.array.isRequired,
-};
+}; */
 
 export default App;
