@@ -8,12 +8,13 @@ import DetailedForecast from './detailed-forecast';
 class App extends React.Component {
 	constructor(props) {
 		super(props);
-
+		console.log(props);
 
 		this.state = {
 			selectedDate: this.props.forecasts[0].date,
 		};
 
+		this.handleForecastSelector = this.handleForecastSelector.bind(this);
 	}
 
 	handleForecastSelector(date) {
@@ -24,10 +25,11 @@ class App extends React.Component {
 
 	render() {
 		const selectedForecast = this.props.forecasts.find(forecast => forecast.date === this.state.selectedDate);
+
 		return (
 			<div>
 				<LocationDetails city={this.props.location.city} country={this.props.location.country} />
-				<ForecastSummaries forecasts={this.props.forecasts} onForecastSelect={this.props.handleForecastSelector} />
+				<ForecastSummaries forecasts={this.props.forecasts} onForecastSelect={this.handleForecastSelector} />
 				<DetailedForecast forecasts={selectedForecast} />
 			</div>
 		);
