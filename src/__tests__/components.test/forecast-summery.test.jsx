@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import ForecastSummery from '../../../src/components/forecast-summery';
-import setupTest from '../../../src/setupTests';
+import ForecastSummery from '../../components/forecast-summery';
+import setupTest from '../../setupTests';
 
 
 describe('forecast-summery', () => {
