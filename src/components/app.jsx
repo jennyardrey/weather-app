@@ -5,12 +5,13 @@ import ForecastSummaries from './forecast-summeries';
 import '../styles/app.scss';
 import DetailedForecast from './detailed-forecast';
 import Axios from 'axios';
-import { get } from 'http';
+import SearchForm from './search-form';
+
 
 class App extends React.Component {
 	constructor(props) {
 		super(props);
-		console.log(props);
+
 
 		this.state = {
 			selectedDate: 0,
@@ -42,12 +43,29 @@ class App extends React.Component {
 		})
 	}
 
+	getCity = (e, city) => {
+		// a.preventDefault();
+
+		Axios.get(`https://mcr-codes-weather.herokuapp.com/forecast?city=${city}`).then(response => {
+			this.setState({
+				location: {
+					city: response.data.location.city,
+					country: response.data.location.country
+				},
+				forecasts: response.data.forecasts,
+			})
+		})
+
+	}
+
+
 	render() {
 		const selectedForecast = this.state.forecasts.find(forecast => forecast.date === this.state.selectedDate);
 
 		return (
 			<div>
 				<LocationDetails city={this.state.location.city} country={this.state.location.country} />
+				<SearchForm searchCity={this.getCity} />
 				<ForecastSummaries forecasts={this.state.forecasts} onForecastSelect={this.handleForecastSelector} />
 				{selectedForecast && <DetailedForecast forecast={selectedForecast} />}
 			</div>
