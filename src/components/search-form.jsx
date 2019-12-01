@@ -1,4 +1,5 @@
 import React from 'react';
+import "../styles/search-form.scss"
 
 class SearchForm extends React.Component {
 	constructor(props) {
@@ -17,8 +18,8 @@ class SearchForm extends React.Component {
 	render() {
 		const { searchCity } = this.props;
 		const { searchText } = this.state;
-		return <div>
-			<input
+		return <div className="search-form">
+			<input className="input"
 				value={this.state.searchText}
 				onChange={this.handleInputChange}
 				className='search'

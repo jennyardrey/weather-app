@@ -1,14 +1,14 @@
 import React from 'react';
-import ForecastSummery from './forecast-summery';
-import '../styles/forecast-summeries.scss';
+import ForecastSummary from './forecast-summary';
+import '../styles/forecast-summaries.scss';
 
-const ForecastSummeries = props => {
+const ForecastSummaries = props => {
 	// console.log(props);
 	return (
 		<div className="forecast-summeries">
 			{
 				props.forecasts.map(forecast => (
-					<ForecastSummery
+					<ForecastSummary
 						key={forecast.date}
 						date={forecast.date}
 						description={forecast.description}
@@ -29,4 +29,4 @@ const ForecastSummeries = props => {
 	icon: PropTypes.string.isRequired,
 	details: PropTypes.func,
 } */
-export default ForecastSummeries;
+export default ForecastSummaries;
