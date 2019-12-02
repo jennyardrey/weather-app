@@ -9,7 +9,7 @@ class ForecastSummary extends React.Component {
 		return (
 			<div className="summary">
 				<span className='date'>{moment(this.props.date).format('ddd Do MMM')}</span>
-				<span className='maxTemp'>Max temp: {this.props.temperature}</span>
+				<span className='maxTemp'>Max temp: {this.props.temperature.max}</span>
 				<span className='desc'>{this.props.description}</span>
 				<span className='icon'><WeatherIcon name="owm" iconId={this.props.icon} flip="horizontal" rotate="90" /></span>
 				<span className='details'><button onClick={() => this.props.onSelect(this.props.date)}>More details...</button></span>
