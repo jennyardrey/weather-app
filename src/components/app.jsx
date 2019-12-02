@@ -6,8 +6,6 @@ import '../styles/app.scss';
 import DetailedForecast from './detailed-forecast';
 import Axios from 'axios';
 import SearchForm from './search-form';
-import Images from '../images/rain.jpg'
-import Liverpool from '../images/Liverpool.jpg'
 
 
 class App extends React.Component {
@@ -42,7 +40,6 @@ class App extends React.Component {
 					city: response.data.location.city,
 					country: response.data.location.country
 				},
-				// background: `url(${Images})`,
 			})
 		})
 	}
@@ -57,20 +54,10 @@ class App extends React.Component {
 					country: response.data.location.country
 				},
 				forecasts: response.data.forecasts,
-
-
-
 			})
-			// this.changeBackground();
 		})
-
 	}
 
-	/* changeBackground = () => {
-		this.setState({
-			background: `url(https://picsum.photos/200/300)`
-		})
-	} */
 
 
 	render() {
@@ -91,12 +78,12 @@ class App extends React.Component {
 	}
 }
 
-/* App.propTypes = {
+App.propTypes = {
 	location: PropTypes.shape({
 		city: PropTypes.string,
 		country: PropTypes.string,
 	}).isRequired,
 	forecasts: PropTypes.array.isRequired,
-}; */
+};
 
 export default App;
